@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-body: var(--font-inter);
+  --font-display: var(--font-manrope);
+  --color-surface-dim: #0b0e14;
+  --color-surface-lowest: #000000;
+  --color-surface-low: #10131a;
+  --color-surface-base: #161a21;
+  --color-surface-high: #1c2028;
+  --color-surface-highest: #22262f;
+  --color-surface-bright: #2c313c;
+  --color-primary: #81ecff;
+  --color-primary-container: #00e3fd;
+  --color-primary-fixed-dim: #4fcde0;
+  --color-secondary: #5cfd80;
+  --color-error: #ff716c;
+  --color-on-surface: #ecedf6;
+  --color-on-surface-variant: #a1a8b8;
+  --color-outline-variant: #6b728080;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply outline-none;
+  }
+
+  html {
+    background: #0b0e14;
+  }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, rgba(129, 236, 255, 0.12), transparent 32%),
+      radial-gradient(circle at 85% 15%, rgba(92, 253, 128, 0.08), transparent 26%),
+      linear-gradient(180deg, #0b0e14 0%, #080b10 100%);
+    color: #ecedf6;
+    font-family: var(--font-body), sans-serif;
+  }
+
+  ::selection {
+    background: rgba(129, 236, 255, 0.25);
+    color: #ecedf6;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(44, 49, 60, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .soft-shadow {
+    box-shadow: 0 40px 80px rgba(236, 237, 246, 0.06);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .pulse-ring {
+    box-shadow: 0 0 0 4px rgba(92, 253, 128, 0.12), 0 0 18px rgba(92, 253, 128, 0.35);
+  }
+
+  .pulse-ring-error {
+    box-shadow: 0 0 0 3px rgba(255, 113, 108, 0.12), 0 0 14px rgba(255, 113, 108, 0.26);
+  }
+}
+
+@keyframes pulse-down {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+
+.animate-pulse-down {
+  animation: pulse-down 1.9s ease-in-out infinite;
+}
+
+@keyframes bar-wave {
+  0%,
+  100% {
+    transform: scaleY(0.62);
+    opacity: 0.6;
+  }
+
+  40% {
+    transform: scaleY(1.12);
+    opacity: 1;
+  }
+
+  70% {
+    transform: scaleY(0.82);
+    opacity: 0.84;
+  }
+}
+
+@layer utilities {
+  .chart-loop {
+    align-items: end;
+  }
+
+  .chart-loop > .bar-loop {
+    transform-origin: bottom;
+    animation: bar-wave var(--bar-speed, 2.2s) ease-in-out infinite;
+    animation-delay: var(--bar-delay, 0ms);
+    will-change: transform, opacity;
+  }
+}
